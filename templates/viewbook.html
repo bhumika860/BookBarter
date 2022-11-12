@@ -1,0 +1,46 @@
+{% include "base.html" %}
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://cdn-tailwindcss.vercel.app/"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+        </head>
+      <style>
+          body{
+            background-color: #C78283;
+            font-family: 'Great Vibes', cursive;
+          }
+      </style> 
+
+    <body >
+        
+<div class=" md:grid md:grid-cols-2  md:place-items-center md:mt-12 sm:m-6 sm:block "> 
+    <div>
+    <img src="{{Book.photo.url}}" width="300" height="500" class="md:m-8 sm:m-6 "/><br/>
+     </div>
+    <div class="text-2xl w-3/4 ">
+    <b>{{Book.bookname}}</b><br/>
+    <b>Genre:</b> {{Book.genre}}<br/>
+    <b>Description:</b> {{Book.Description}}<br/>
+    <b>Contact(Email Id) :</b>{{Book.email}}<br/>
+    <b>Price(Rs) :</b>{{Book.price}}<br/>
+    {% if user.is_authenticated %}
+    {% if Book.user_id == user.id %}
+    <a href="{% url 'editbookdetails' Book.bookid %}" class = " btn btn-success ">Edit</a>
+    <a href="{% url 'deletebook' Book.bookid %}" class = " btn btn-danger ">Delete</a><br/><br/>
+   {%else%}
+   <button><a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target="_blank">Send a mail</a></button>
+    {%endif%}
+    {%endif%}
+    
+</div>
+</div>
+       
+        
+    </body>
+</html>
